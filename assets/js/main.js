@@ -1,237 +1,217 @@
 /*
-	Big Picture by HTML5 UP
+	Helios by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
 (function($) {
 
-	skel.breakpoints({
-		xxlarge: '(max-width: 1920px)',
-		xlarge: '(max-width: 1680px)',
-		large: '(max-width: 1280px)',
-		medium: '(max-width: 1000px)',
-		small: '(max-width: 736px)',
-		xsmall: '(max-width: 480px)',
-	});
+	var	$window = $(window),
+		$body = $('body'),
+		settings = {
 
-	$(function() {
+			// Carousels
+				carousels: {
+					speed: 4,
+					fadeIn: true,
+					fadeDelay: 250
+				},
 
-		var	$window = $(window),
-			$body = $('body'),
-			$header = $('#header'),
-			$all = $body.add($header);
+		};
 
-		// Disable animations/transitions until the page has loaded.
-			$body.addClass('is-loading');
+	// Breakpoints.
+		breakpoints({
+			wide:      [ '1281px',  '1680px' ],
+			normal:    [ '961px',   '1280px' ],
+			narrow:    [ '841px',   '960px'  ],
+			narrower:  [ '737px',   '840px'  ],
+			mobile:    [ null,      '736px'  ]
+		});
 
-			$window.on('load', function() {
-				window.setTimeout(function() {
-					$body.removeClass('is-loading');
-				}, 0);
-			});
+	// Play initial animations on page load.
+		$window.on('load', function() {
+			window.setTimeout(function() {
+				$body.removeClass('is-preload');
+			}, 100);
+		});
 
-		// Touch mode.
-			skel.on('change', function() {
+	// Dropdowns.
+		$('#nav > ul').dropotron({
+			mode: 'fade',
+			speed: 350,
+			noOpenerFade: true,
+			alignment: 'center'
+		});
 
-				if (skel.vars.mobile || skel.breakpoint('small').active)
-					$body.addClass('is-touch');
-				else
-					$body.removeClass('is-touch');
+	// Scrolly.
+		$('.scrolly').scrolly();
 
-			});
+	// Nav.
 
-		// Fix: Placeholder polyfill.
-			$('form').placeholder();
+		// Button.
+			$(
+				'<div id="navButton">' +
+					'<a href="#navPanel" class="toggle"></a>' +
+				'</div>'
+			)
+				.appendTo($body);
 
-		// Fix: IE flexbox fix.
-			if (skel.vars.IEVersion <= 11
-			&&	skel.vars.IEVersion >= 10) {
+		// Panel.
+			$(
+				'<div id="navPanel">' +
+					'<nav>' +
+						$('#nav').navList() +
+					'</nav>' +
+				'</div>'
+			)
+				.appendTo($body)
+				.panel({
+					delay: 500,
+					hideOnClick: true,
+					hideOnSwipe: true,
+					resetScroll: true,
+					resetForms: true,
+					target: $body,
+					visibleClass: 'navPanel-visible'
+				});
 
-				var $main = $('.main.fullscreen'),
-					IEResizeTimeout;
+	// Carousels.
+		$('.carousel').each(function() {
 
-				$window
-					.on('resize.ie-flexbox-fix', function() {
+			var	$t = $(this),
+				$forward = $('<span class="forward"></span>'),
+				$backward = $('<span class="backward"></span>'),
+				$reel = $t.children('.reel'),
+				$items = $reel.children('article');
 
-						clearTimeout(IEResizeTimeout);
+			var	pos = 0,
+				leftLimit,
+				rightLimit,
+				itemWidth,
+				reelWidth,
+				timerId;
 
-						IEResizeTimeout = setTimeout(function() {
+			// Items.
+				if (settings.carousels.fadeIn) {
 
-							var wh = $window.height();
+					$items.addClass('loading');
 
-							$main.each(function() {
+					$t.scrollex({
+						mode: 'middle',
+						top: '-20vh',
+						bottom: '-20vh',
+						enter: function() {
 
-								var $this = $(this);
+							var	timerId,
+								limit = $items.length - Math.ceil($window.width() / itemWidth);
 
-								$this.css('height', '');
+							timerId = window.setInterval(function() {
+								var x = $items.filter('.loading'), xf = x.first();
 
-								if ($this.height() <= wh)
-									$this.css('height', (wh - 50) + 'px');
+								if (x.length <= limit) {
 
-							});
+									window.clearInterval(timerId);
+									$items.removeClass('loading');
+									return;
 
-						});
+								}
 
+								xf.removeClass('loading');
+
+							}, settings.carousels.fadeDelay);
+
+						}
+					});
+
+				}
+
+			// Main.
+				$t._update = function() {
+					pos = 0;
+					rightLimit = (-1 * reelWidth) + $window.width();
+					leftLimit = 0;
+					$t._updatePos();
+				};
+
+				$t._updatePos = function() { $reel.css('transform', 'translate(' + pos + 'px, 0)'); };
+
+			// Forward.
+				$forward
+					.appendTo($t)
+					.hide()
+					.mouseenter(function(e) {
+						timerId = window.setInterval(function() {
+							pos -= settings.carousels.speed;
+
+							if (pos <= rightLimit)
+							{
+								window.clearInterval(timerId);
+								pos = rightLimit;
+							}
+
+							$t._updatePos();
+						}, 10);
 					})
-					.triggerHandler('resize.ie-flexbox-fix');
+					.mouseleave(function(e) {
+						window.clearInterval(timerId);
+					});
 
-			}
+			// Backward.
+				$backward
+					.appendTo($t)
+					.hide()
+					.mouseenter(function(e) {
+						timerId = window.setInterval(function() {
+							pos += settings.carousels.speed;
 
-		// Prioritize "important" elements on small.
-			skel.on('+small -small', function() {
-				$.prioritize(
-					'.important\\28 small\\29',
-					skel.breakpoint('small').active
-				);
-			});
+							if (pos >= leftLimit) {
 
-		// Gallery.
-			$window.on('load', function() {
+								window.clearInterval(timerId);
+								pos = leftLimit;
 
-				var $gallery = $('.gallery');
+							}
 
-				$gallery.poptrox({
-					baseZIndex: 10001,
-					useBodyOverflow: false,
-					usePopupEasyClose: false,
-					overlayColor: '#1f2328',
-					overlayOpacity: 0.65,
-					usePopupDefaultStyling: false,
-					usePopupCaption: true,
-					popupLoaderText: '',
-					windowMargin: 50,
-					usePopupNav: true
-				});
+							$t._updatePos();
+						}, 10);
+					})
+					.mouseleave(function(e) {
+						window.clearInterval(timerId);
+					});
 
-				// Hack: Adjust margins when 'small' activates.
-					skel
-						.on('-small', function() {
-							$gallery.each(function() {
-								$(this)[0]._poptrox.windowMargin = 50;
-							});
-						})
-						.on('+small', function() {
-							$gallery.each(function() {
-								$(this)[0]._poptrox.windowMargin = 5;
-							});
-						});
+			// Init.
+				$window.on('load', function() {
 
-			});
+					reelWidth = $reel[0].scrollWidth;
 
-		// Section transitions.
-			if (skel.canUse('transition')) {
+					if (browser.mobile) {
 
-				var on = function() {
+						$reel
+							.css('overflow-y', 'hidden')
+							.css('overflow-x', 'scroll')
+							.scrollLeft(0);
+						$forward.hide();
+						$backward.hide();
 
-					// Galleries.
-						$('.gallery')
-							.scrollex({
-								top:		'30vh',
-								bottom:		'30vh',
-								delay:		50,
-								initialize:	function() { $(this).addClass('inactive'); },
-								terminate:	function() { $(this).removeClass('inactive'); },
-								enter:		function() { $(this).removeClass('inactive'); },
-								leave:		function() { $(this).addClass('inactive'); }
-							});
+					}
+					else {
 
-					// Generic sections.
-						$('.main.style1')
-							.scrollex({
-								mode:		'middle',
-								delay:		100,
-								initialize:	function() { $(this).addClass('inactive'); },
-								terminate:	function() { $(this).removeClass('inactive'); },
-								enter:		function() { $(this).removeClass('inactive'); },
-								leave:		function() { $(this).addClass('inactive'); }
-							});
+						$reel
+							.css('overflow', 'visible')
+							.scrollLeft(0);
+						$forward.show();
+						$backward.show();
 
-						$('.main.style2')
-							.scrollex({
-								mode:		'middle',
-								delay:		100,
-								initialize:	function() { $(this).addClass('inactive'); },
-								terminate:	function() { $(this).removeClass('inactive'); },
-								enter:		function() { $(this).removeClass('inactive'); },
-								leave:		function() { $(this).addClass('inactive'); }
-							});
+					}
 
-					// Contact.
-						$('#contact')
-							.scrollex({
-								top:		'50%',
-								delay:		50,
-								initialize:	function() { $(this).addClass('inactive'); },
-								terminate:	function() { $(this).removeClass('inactive'); },
-								enter:		function() { $(this).removeClass('inactive'); },
-								leave:		function() { $(this).addClass('inactive'); }
-							});
+					$t._update();
 
-				};
-
-				var off = function() {
-
-					// Galleries.
-						$('.gallery')
-							.unscrollex();
-
-					// Generic sections.
-						$('.main.style1')
-							.unscrollex();
-
-						$('.main.style2')
-							.unscrollex();
-
-					// Contact.
-						$('#contact')
-							.unscrollex();
-
-				};
-
-				skel.on('change', function() {
-
-					if (skel.breakpoint('small').active)
-						(off)();
-					else
-						(on)();
+					$window.on('resize', function() {
+						reelWidth = $reel[0].scrollWidth;
+						$t._update();
+					}).trigger('resize');
 
 				});
 
-			}
-
-		// Events.
-			var resizeTimeout, resizeScrollTimeout;
-
-			$window
-				.resize(function() {
-
-					// Disable animations/transitions.
-						$body.addClass('is-resizing');
-
-					window.clearTimeout(resizeTimeout);
-
-					resizeTimeout = window.setTimeout(function() {
-
-						// Update scrolly links.
-							$('a[href^="#"]').scrolly({
-								speed: 1500,
-								offset: $header.outerHeight() - 1
-							});
-
-						// Re-enable animations/transitions.
-							window.setTimeout(function() {
-								$body.removeClass('is-resizing');
-								$window.trigger('scroll');
-							}, 0);
-
-					}, 100);
-
-				})
-				.load(function() {
-					$window.trigger('resize');
-				});
-
-	});
+		});
 
 })(jQuery);
