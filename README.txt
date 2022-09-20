@@ -1,33 +1,36 @@
-Helios by HTML5 UP
-html5up.net | @ajlkn
-Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+
+TITLE: 
+Roxy - Bootstrap 4 template built by GetTemplates.co
+
+AUTHOR:
+DESIGNED & DEVELOPED by GetTemplates.co and FreeHTML5.co
+
+Websites: https://gettemplates.co https://freehtml5.co/
 
 
-This is Helios, a brand new site template for HTML5 UP. It's clean, modern, and designed
-to take advantage of larger (well, wider) displays while still being capable of gracefully
-scaling down to fit all manner of smaller ones.
+CREDITS:
 
-Demo images* courtesy of Michael Domaradzki, an awesome photographer I met over at
-deviantART. Check out his portfolio here:
+Bootstrap
+http://getbootstrap.com/
 
-http://md.photomerchant.net/
+jQuery
+http://jquery.com/
 
-(* = Not included! Only meant for use with my own on-site demo, so please do NOT download
-and/or use any of Michaels's work without his explicit permission!)
+OwlCarousel
+https://owlcarousel2.github.io/OwlCarousel2/
 
-AJ
-aj@lkn.io | @ajlkn
+Isotope
+https://isotope.metafizzy.co
 
+Select2
+https://select2.org
 
-Credits:
+Stellar
+http://markdalgleish.com/projects/stellar.js/
 
-	Demo Images:
-		Michael Domaradzki (md.photomerchant.net)
+Lightcase
+https://cornel.bopp-art.com/lightcase/
 
-	Icons:
-		Font Awesome (fontawesome.io)
+Demo Images:
+http://unsplash.com
 
-	Other:
-		jQuery (jquery.com)
-		Scrollex (github.com/ajlkn/jquery.scrollex)
-		Responsive Tools (github.com/ajlkn/responsive-tools)
