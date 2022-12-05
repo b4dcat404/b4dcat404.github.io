@@ -1,5 +1,5 @@
 # b4dcat404.github.io
-Personal website 👇
+Team website 👇
               b4dcat404
 
-Latest projects, some info about me.
+Latest projects, some info about us
