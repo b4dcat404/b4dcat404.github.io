@@ -1,5 +1,7 @@
-# b4dcat404.github.io
-Team website 👇
-              b4dcat404
+# Website of the development team - b4dcat404
 
-Latest projects, some info about us
+## Our latests projects
+
+## Contact info
+
+## Utilities for developers
