@@ -682,7 +682,7 @@ section {
     cursor: pointer; }
 
 .blog-content img.float-left {
-  margin: 15px 15px 15px 0; }
+  margin: -35px 15px 15px 0 ; }
 
 .blog-content .img.float-right {
   margin: 15px 0 15px 15px; }
@@ -747,7 +747,9 @@ section {
     /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #333399, #ff00cc);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    padding: 10px; } }
+    padding: 10px; } 
+  .blog-content img.float-left{
+    margin: 15px 15px 15px 0;}}
 
 @media (max-width: 767px) {
   .jumbotron h1 {
@@ -757,5 +759,6 @@ section {
   .progress {
     height: 30px;
     font-size: 16px; } }
-
+  
+  }
 /*=====  End of RESPONSIVE  ======*/
