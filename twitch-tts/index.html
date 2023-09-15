@@ -56,19 +56,19 @@
                 <input id="channelname" name="channel" type="text" class="form-control" />
               </div>
               <div class="col-lg-4 col-md-4 4 col-sm-4 col">
-                <button class="btn btn-primary" onclick="startListening()" id="listenBtn" type="submit"> Слушать</button>
+                <button class="btn btn-primary" onclick="startListening()" id="listenBtn" type="submit">Слушать</button>
               </div>
             </div>
           </form>
           <p></p>
           <div id="status" class="alert alert-info">
-            Ожидание канала для прослушивания...
+            Ожидание названия канала...
           </div>
           <p></p>
           <div id="options-container" class="container">
             <div class="row">
               <div class="col-6">
-                <label for="volume"><small>Громкость речи</small></label>
+                <label for="volume"><small>Громкость голоса</small></label>
               </div>
               <div class="col-6">
                 <i class="bi bi-volume-up-fill"></i>
@@ -83,9 +83,17 @@
                 <select id="voiceSelect" class="form-control"></select>
               </div>
             </div> 
+            <div class="row" style="display: none;">
+              <div class="col-6">
+                <label for="hqspeech"><small>Use <a href="https://aws.amazon.com/polly/" target="_blank">Amazon Polly</a> (Beta)</small></label>
+              </div>
+              <div class="col-6">
+                <input id="hqspeech" type="checkbox" />
+              </div>
+            </div>
             <div class="row">
               <div class="col-6">
-                <label for="modsonly"><small>Только для модераторов (ботов)</small></label>
+                <label for="modsonly"><small>Только для модераторов и (ботов), команда <b>!say</b></small></label>
               </div>
               <div class="col-5">
                 <input id="modsonly" type="checkbox" />
@@ -93,21 +101,17 @@
             </div>
             <div class="row">
               <div class="col-6">
-                <label for="modsonly"><small>Только для команды <b>!say</b></small></label>
-              </div>
-              <div class="col-5">
-                <input id="saycomand" type="checkbox" />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6">
-                <label for="announcechatter"><small>Озвучивать имя отправителя</small></label>
+                <label for="announcechatter"><small>Озвучивать ник отправителя</small></label>
               </div>
               <div class="col-6">
                 <input id="announcechatter" type="checkbox" />
               </div>
             </div>            
-            
+            <div class="row">
+              <div class="col-12">
+              <small><i></i></small>
+                </div>
+            </div>
             <div class="row">
               <audio id="audiotrack"></audio>
             </div>
@@ -121,25 +125,11 @@
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 pt-3">
           <div class="card">
-            <img class="card-img-top" src="images/ogshare.jpg" alt="PeepoG">
+            <a href="https://boosty.to/b4dcat404"><img class="card-img-top" src="images/баннер_boosty.jpg" alt="Boosty"></a>
+            <a href="https://www.donationalerts.com/r/b4dcat404"><img class="card-img-top" src="images/баннер_donate.jpg" alt="Donate"></a>
             <div class="card-body">
-              <h5 class="card-title">Tip Jar</h5>
-              <p class="card-text">While not required by any means, sending a tip helps pay for server costs and my time developing this project. Thanks so much!</p>
-              <form action="#">
-                <div class="row">
-                  <div class="col-6">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">$</div>
-                        <input type="number" min="0" class="form-control" value="5" id="tipAmount" onchange="valueCheck()" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <button class="btn btn-primary" id="tipBtn" type="submit" onclick="startCheckout()">Send Tip</button>
-                  </div>
-                </div>
-              </form>
+              <h5 class="card-title">Поддержать проект</h5>
+              <p class="card-text">Хотя отправка чаевых ни в коем случае не требуется, они помогают оплатить расходы на сервер и мое время на разработку этого проекта. Большое спасибо!</p>
             </div>
           </div>
         </div>
@@ -186,7 +176,7 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="https://github.com/b4dcat404/b4dcat404.github.io/tree/main/twitch-tts" target="_blank">Source Code</a>
+            <a class="nav-link" href="https://github.com/seanhweb/Twitch-Text-to-Speech" target="_blank">Source Code</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="https://www.seanhweb.com" target="_blank">Creator - Seanhweb</a>

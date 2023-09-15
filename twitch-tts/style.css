@@ -20,3 +20,6 @@ body{
 #options-container i, #options-container input {
     vertical-align:middle;
 }
+.messageContent{
+    color: #000;
+}
