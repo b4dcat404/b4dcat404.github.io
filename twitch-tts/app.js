@@ -203,8 +203,15 @@ function startListening() {
       const isBroadcaster = badges.broadcaster;
       const isMod = badges.moderator;
       if(document.getElementById('modsonly').checked) {
-        if(isBroadcaster || isMod ) {
-          new TTS(message, tags);
+        if(isMod && message.startsWith('!say ')) {
+          const textToSay = message.slice(5);
+          new TTS(textToSay, tags);
+        }
+      }
+      else if(document.getElementById('saycomand').checked) {
+        if(message.startsWith('!say ')){
+          const textToSay = message.slice(5);
+          new TTS(textToSay, tags)
         }
       }
       else {

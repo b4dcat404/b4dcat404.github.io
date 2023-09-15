@@ -1,8 +1,10 @@
 body{
-    background:#333; 
+    background:#f1f1f1; 
     padding-bottom:120px;
 }
-
+.jumbotron{
+    background: linear-gradient(135deg, #1da1f2, #981ceb);
+}
 #main {
     color:#fff;
 }

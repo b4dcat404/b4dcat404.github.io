@@ -49,27 +49,26 @@
       <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-12">
           <h1>Twitch Chat TTS</h1>
-          <p>Please enter a channel below, then click "Start Listening" for text to speech.</p>
+          <p>Введи название канала и нажми кнопку "Слушать"</p>
           <form action="#">
             <div class="row">
               <div class="col-lg-8 col-md-8 col-sm-8 col">
                 <input id="channelname" name="channel" type="text" class="form-control" />
               </div>
               <div class="col-lg-4 col-md-4 4 col-sm-4 col">
-                <button class="btn btn-primary" onclick="startListening()" id="listenBtn" type="submit"> Start
-                  Listening</button>
+                <button class="btn btn-primary" onclick="startListening()" id="listenBtn" type="submit"> Слушать</button>
               </div>
             </div>
           </form>
           <p></p>
           <div id="status" class="alert alert-info">
-            Waiting for channel name...
+            Ожидание канала для прослушивания...
           </div>
           <p></p>
           <div id="options-container" class="container">
             <div class="row">
               <div class="col-6">
-                <label for="volume"><small>Speech Volume</small></label>
+                <label for="volume"><small>Громкость речи</small></label>
               </div>
               <div class="col-6">
                 <i class="bi bi-volume-up-fill"></i>
@@ -78,7 +77,7 @@
             </div>
             <div class="row">
               <div class="col-6">
-                <label for="voiceSelect"><small>Voice (not applicable to Polly)</small></label>
+                <label for="voiceSelect"><small>Выбор голоса</small></label>
               </div>
               <div class="col-6">
                 <select id="voiceSelect" class="form-control"></select>
@@ -86,15 +85,7 @@
             </div> 
             <div class="row">
               <div class="col-6">
-                <label for="hqspeech"><small>Use <a href="https://aws.amazon.com/polly/" target="_blank">Amazon Polly</a> (Beta)</small></label>
-              </div>
-              <div class="col-6">
-                <input id="hqspeech" type="checkbox" />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6">
-                <label for="modsonly"><small>Limit TTS to Moderators Only</small></label>
+                <label for="modsonly"><small>Только для модераторов (ботов)</small></label>
               </div>
               <div class="col-5">
                 <input id="modsonly" type="checkbox" />
@@ -102,19 +93,21 @@
             </div>
             <div class="row">
               <div class="col-6">
-                <label for="announcechatter"><small>Announce Chatter's Name Before Message</small></label>
+                <label for="modsonly"><small>Только для команды <b>!say</b></small></label>
+              </div>
+              <div class="col-5">
+                <input id="saycomand" type="checkbox" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <label for="announcechatter"><small>Озвучивать имя отправителя</small></label>
               </div>
               <div class="col-6">
                 <input id="announcechatter" type="checkbox" />
               </div>
             </div>            
-            <div class="row">
-              <div class="col-12">
-              <small><i>Note: Amazon Polly integration is a very early work in progress. Messages sent will <a
-                    href="https://www.youtube.com/watch?v=YyIrilqBDaU" target="_blank">parry</a> each other, rather than
-                  queue.</i></small>
-                </div>
-            </div>
+            
             <div class="row">
               <audio id="audiotrack"></audio>
             </div>
@@ -193,7 +186,7 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="https://github.com/seanhweb/Twitch-Text-to-Speech" target="_blank">Source Code</a>
+            <a class="nav-link" href="https://github.com/b4dcat404/b4dcat404.github.io/tree/main/twitch-tts" target="_blank">Source Code</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="https://www.seanhweb.com" target="_blank">Creator - Seanhweb</a>
